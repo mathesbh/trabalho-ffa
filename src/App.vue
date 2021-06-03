@@ -1,16 +1,19 @@
 <template>
-<div>
-  <h2>Confirmados:</h2>{{ info.confirmed }}
-</div>
+  <div>
+    <Home :info="info"/>
+    <router-view/>
+  </div>
+  
 </template>
 
 <script>
 import { Api } from './services/Api';
+import Home from './components/Home';
 
 export default {
   name: 'App',
   components: {
-    
+    Home,
   },
   data(){
     return{
