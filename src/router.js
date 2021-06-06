@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from './components/Home';
 import StatesPanel from './components/StatesPanel';
+import StatesDetails from './components/StatesDetails';
 
 const routes = [
   {
@@ -12,7 +13,12 @@ const routes = [
     path: "/estados",
     name: "StatesPanel",
     component: StatesPanel,
-  }  
+  },
+  {
+    path: "/detalhes/",
+    name: "StatesDetails",
+    component: StatesDetails,
+  } 
 ];
 
 const router = createRouter({
