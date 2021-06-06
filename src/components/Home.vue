@@ -1,133 +1,100 @@
 <template>
   <div>
-    <NavBar :items="navbar"/>
+    <NavBar :items="navbar" />
     <div class="container">
-    <div id="tarefaffa">
+      <div class="panel">
+        <h2>Informações atuais:</h2>
+        <img src="https://s3.static.brasilescola.uol.com.br/be/2021/02/covid-19.jpg" />
+        <h3>Última atualização: </h3>
+        <p>Confirmados: {{brazil.confirmed}}</p>
+        <p>Recuperados: {{brazil.recovered}}</p>
+        <p>Óbitos: {{brazil.deaths}}</p>
+        <p>População: {{brazil.population}}</p>
+      </div>
 
-	<div id="contents">
-      			
-	<h2><u>  				
-		Informações atuais abaixo: </a>  			
-	</u></h2>  		
-
-    <img src="https://s3.static.brasilescola.uol.com.br/be/2021/02/covid-19.jpg" width="320" height="205" />	
-	<h3><u>Última atualização: 05/06/2021 - 09:00 </u></h3>  			
-				
-			
-	 				
-	<li>Confirmados: 16.720.081</li>
-	<br>  				
-	<li>Recuperados: 14.560.845</li>  	
-    <br>
-	<li>Óbitos: 10.000.234</li>  				
-	<br>
-	<li>População: 200.000.00</li>  				
-	  		
-	 	</div>  
-		 
-    <div id="menu">
-    <h3><u>Casos por:</u></h3>  		
-				
-		<li>Estados Brasileiros</li><br>
-        <input type="button" value="Acessar">			
-			
-	</div>  	
-
-    </div>	
-	</div>
+      <div class="menu">
+        <h3>Casos por:</h3>
+        <p>Estados Brasileiros</p>
+        <router-link class="btn" to="/estados">Acessar</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import NavBar from './NavBar';
+import NavBar from "./NavBar";
+import { Api } from "../services/Api";
 
 export default {
-  name: 'Home',
-  props: {
-
-  },
+  name: "Home",
+  props: {},
   components: {
     NavBar
   },
-  data(){
-    return{
+  data() {
+    return {
       navbar: {
-        covid: 'Covid-19',
-        title: 'Brasil'
-      }    
-    }
+        covid: "Covid-19",
+        title: "Brasil"
+      },
+      brazil: "",
+      btnTitle: "Acessar"
+    };
   },
-}
+  mounted() {
+    Api.getBrazil().then(resp => (this.brazil = resp.data.All));
+  }
+};
 </script>
 
 <style scoped>
-body  {  	
-	margin: 0;  	
-	padding: 0;  	
-	background: rgb(221, 221, 221); 
-    
- }
- 
-.container{
-
-    max-width: 1000px;
-    margin: 0 auto;
-
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: 70% 30%;
 }
 
-#container  {  
-
-    display: flex;
-    justify-content: center;
-    font-size: 30px;	
-	margin: 1em auto;  	
-	width: 650px;  	
-	background:rgb(227, 235, 230);  
-	}  
-
-#header {
-    
-    text-align: center;
-    }  
-
-#mainnav {
-    font-size: 25px;
-    text-align: center;
-    background: rgb(247, 243, 246); 
-    
-}  
-
-#tarefaffa{
-
-    justify-content: space-evenly;
-    margin: 50px;
-    display:flex;
-    align-items: center;
-    
+.panel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 600px;
 }
-    
-    
-#menu  {  
-    font-size: 18px;	
-    padding: 50px;
-    text-align: center;
-	float: right; 	
-	width: 165px;  	
-	background: rgb(235, 250, 243);  
-	} 
 
-#contents  {  
-    
-    font-size: 18px;
-    display:flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-	float: center;  	
-	width: 440px;  	
-	background: rgb(235, 250, 243);  	
-	margin: 0 0 0 20px;  
-	}
+.panel img{
+  width: 80%;
+  border-radius: 15px;
+  box-shadow: 5px 5px 8px #561008;
+}
 
+.menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.menu h3, p{
+  margin: 1%;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 7px 20px;
+  border-radius: 15px;
+  border: #990000;
+  background-color: #990000;
+  color: aliceblue;
+  cursor: pointer;
+  display: flex;
+  align-self: flex-end;
+  margin-top: 3%;
+}
+
+.btn:hover {
+  background-color: #f51219;
+}
 </style>
