@@ -1,21 +1,26 @@
 <template>
   <div>
-    <p>{{ info }}</p>
+    <NavBar :items="navbar"/>
   </div>
 </template>
 
 <script>
+import NavBar from './NavBar';
+
 export default {
   name: 'Home',
   props: {
-    info: Object,
+
   },
   components: {
-    
+    NavBar
   },
   data(){
     return{
-      
+      navbar: {
+        covid: 'Covid-19',
+        title: 'Brasil'
+      }    
     }
   },
 }
