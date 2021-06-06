@@ -6,33 +6,31 @@
       </div>
       <div class="box" v-else>
           <h3>{{index}}</h3>
-          <p>Atualização: {{handleDate(item.updated)}}</p>
-          <button>Detalhes</button>
+          <p>Confirmados: {{item.confirmed}}</p>
+          <BtnDetail :btnTitle="btnTitle"/>
       </div>    
     </div>
   </div>
 </template>
 
 <script>
+import BtnDetail from './BtnDetail';
+
 export default {
   name: 'StatesItem',
   components: {
-    
+    BtnDetail
   },
   props: {
     states: Object
   },
   data(){
     return{
-
+      btnTitle: 'Detalhes',
     }
   },
   methods: {
-    handleDate(data){
-      const date = data.split(" ");
-      const formatData = date[0].split("/");
-      return `${formatData[2]}-${formatData[1]}-${formatData[0]}`
-    }
+    
   },
 }
 </script>
@@ -52,6 +50,10 @@ export default {
     margin: 1%;
     border: #990000 2px solid;
     border-radius: 15px;
+  }
+
+  h3{
+    border-bottom: 1px solid #990000;
   }
 
   .img-states{
