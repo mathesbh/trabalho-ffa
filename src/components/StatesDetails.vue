@@ -1,9 +1,8 @@
 <template>
   <div>
     <NavBar :items="navbar" />
-
     <div class="state" v-if="uf === 'Minas Gerais'">
-      <h1>Minas Gerais</h1>
+      <h1>{{uf}}</h1>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Minas_Gerais_in_Brazil.svg/300px-Minas_Gerais_in_Brazil.svg.png"
       />
@@ -11,16 +10,16 @@
         <h3>População:</h3>
         <p>21.292.666 pessoas</p>
         <h3>Casos confirmados:</h3>
-        <p>1.616.876 casos</p>
+        <p>{{state.confirmed}}</p>
         <h3>Recuperados:</h3>
-        <p>1.483.661</p>
+        <p>{{state.recovered}}</p>
         <h3>Óbitos:</h3>
-        <p>41.479 pessoas</p>
+        <p>{{state.deaths}} pessoas</p>
       </div>
     </div>
 
     <div class="state" v-if="uf === 'Acre'">
-      <h1>Acre</h1>
+      <h1>{{uf}}</h1>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Acre_in_Brazil.svg/300px-Acre_in_Brazil.svg.png"
       />
@@ -28,16 +27,16 @@
         <h3>População:</h3>
         <p>894.470 pessoas</p>
         <h3>Casos confirmados:</h3>
-        <p>83.240</p>
+        <p>{{state.confirmed}}</p>
         <h3>Recuperados:</h3>
-        <p>78.359</p>
+        <p>{{state.recovered}}</p>
         <h3>Óbitos:</h3>
-        <p>1.686 pessoas</p>
+        <p>{{state.deaths}} pessoas</p>
       </div>
     </div>
 
     <div class="state" v-if="uf === 'Alagoas'">
-      <h1>Alagoas</h1>
+      <h1>{{uf}}</h1>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Alagoas_in_Brazil.svg/300px-Alagoas_in_Brazil.svg.png"
       />
@@ -45,11 +44,11 @@
         <h3>População:</h3>
         <p>3.351.543 pessoas</p>
         <h3>Casos confirmados:</h3>
-        <p>196.583</p>
+        <p>{{state.confirmed}}</p>
         <h3>Recuperados:</h3>
-        <p>186.876</p>
+        <p>{{state.recovered}}</p>
         <h3>Óbitos:</h3>
-        <p>4.839 pessoas</p>
+        <p>{{state.deaths}} pessoas</p>
       </div>
     </div>
 
@@ -470,26 +469,30 @@ import { Api } from "../services/Api";
 export default {
   name: "StatesDetails",
   components: {
-    NavBar,
+    NavBar
   },
   data() {
     return {
       navbar: {
         covid: "Covid-19",
-        title: "Estados",
+        title: "Estados"
       },
-      uf: null,
+      uf: "",
+      state: '',
     };
   },
-  methods: {},
-  mounted() {
-    Api.getBrazil().then((resp) => (this.states = resp.data));
+  methods: {
+
   },
+  mounted() {
+    this.uf = this.$route.params.uf;
+
+    Api.getBrazil().then(resp => this.state = resp.data[`${this.$route.params.uf}`]);
+  }
 };
 </script>
 
 <style scoped>
-
 .dados {
   display: grid;
 }
@@ -503,7 +506,6 @@ export default {
   align-items: center;
   padding: 50px;
   margin: 30px 300px 20px 300px;
-
 }
 
 img {
@@ -511,7 +513,7 @@ img {
   height: 300px;
   border: #fff 2px solid;
   border-radius: 15px;
-  padding: 0px
+  padding: 0px;
 }
 
 h1 {

@@ -15,7 +15,7 @@ const routes = [
     component: StatesPanel,
   },
   {
-    path: "/detalhes/",
+    path: "/detalhes/:uf",
     name: "StatesDetails",
     component: StatesDetails,
   } 
