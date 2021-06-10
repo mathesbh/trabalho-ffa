@@ -6,7 +6,11 @@
       </div>
       <div class="box" v-else>
           <h3>{{index}}</h3>
-          <p>Confirmados: {{item.confirmed}}</p>
+          <div v-for="(flag, flag_i) in flags" :key="flag_i">
+            <span v-if="flag.uf == index">
+              <StateFlag :flag="flag.flag" />
+            </span>
+          </div>
           <router-link class="btn" :to="{path: '/detalhes/' + index}">Detalhes</router-link>
       </div>    
     </div>
@@ -14,24 +18,28 @@
 </template>
 
 <script>
-
+import StateFlag from './StateFlag';
+import { Flags } from '../services/Flags';
 
 export default {
   name: 'StatesItem',
   components: {
-    
+    StateFlag,
   },
   props: {
     states: Object
   },
   data(){
     return{
-      
+      flags: [],
     }
   },
   methods: {
     
   },
+  mounted(){
+    Flags.forEach(f => this.flags.push(f))
+  }
 }
 </script>
 
@@ -44,7 +52,7 @@ export default {
   .box{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     height: 130px;
     margin: 1%;
@@ -52,13 +60,9 @@ export default {
     border-radius: 15px;
   }
 
-  h3{
-    border-bottom: 1px solid #990000;
-  }
-
   .btn {
   text-decoration: none;
-  padding: 7px 20px;
+  padding: 3px 15px;
   border-radius: 15px;
   border: #990000;
   background-color: #990000;
