@@ -7,26 +7,26 @@
       <div class="box" v-else>
           <h3>{{index}}</h3>
           <p>Confirmados: {{item.confirmed}}</p>
-          <BtnDetail :btnTitle="btnTitle"/>
+          <router-link class="btn" :to="{path: '/detalhes/' + index}">Detalhes</router-link>
       </div>    
     </div>
   </div>
 </template>
 
 <script>
-import BtnDetail from './BtnDetail';
+
 
 export default {
   name: 'StatesItem',
   components: {
-    BtnDetail
+    
   },
   props: {
     states: Object
   },
   data(){
     return{
-      btnTitle: 'Detalhes',
+      
     }
   },
   methods: {
@@ -54,6 +54,20 @@ export default {
 
   h3{
     border-bottom: 1px solid #990000;
+  }
+
+  .btn {
+  text-decoration: none;
+  padding: 7px 20px;
+  border-radius: 15px;
+  border: #990000;
+  background-color: #990000;
+  color: aliceblue;
+  cursor: pointer;
+  }
+
+  .btn:hover {
+  background-color: #f51219;
   }
 
   .img-states{
