@@ -105,6 +105,6 @@ export const Maps = [
   },
   {
     uf: 'Tocantins',
-    map: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Tocantins_in_Brazil.svg/300px-Tocantins_in_Brazil.svg.png"',
+    map: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Tocantins_in_Brazil.svg/300px-Tocantins_in_Brazil.svg.png',
   },
 ]
