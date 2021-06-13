@@ -1,4 +1,6 @@
 # covid
+Trabalho Final da disciplina FFA - Desenvolvimento Web Full Stack
+Grupo: Bruno Bartolomeu, Juliana Fernandes e Matheus Salomão;
 
 ## Project setup
 ```
